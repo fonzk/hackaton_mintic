@@ -10,6 +10,10 @@
   object-fit: cover;
 }
 
+.icon__car{
+  font-size: 30px;
+}
+
 .carrito{
   text-decoration: none;
   font-size: 30px;

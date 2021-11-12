@@ -36,7 +36,7 @@
                   </form>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-3 d-flex justify-content-lg-between align-content-center align-item-center mt-2 mt-lg-0">
-                  <a href="#" class="text-danger carrito ms-3"><i class="fas fa-cart-plus text-success"></i> 4</a>
+                  <span class="icon__car"><i class="fas fa-cart-plus text-success"></i></span><a href="#" class="text-danger carrito">4</a>
                   <form>
                     <button class="btn btn-danger">Cerrar sesión</button>
                   </form>
@@ -92,7 +92,7 @@
               <div class="row">
                 <div class="col-md-12 producto">
                   <div class="card card__producto">
-                    <img src="img/products/p1.jpg" class="card-img-top" alt="...">
+                    <img src="{{ url_for('static', filename='img/products/p1.jpg') }}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">Samsung A70</h5>
                       <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam minus ipsam magnam fugiat laudantium enim aperiam. Quae odio harum, dolor a iusto, velit id, quibusdam aliquid asperiores praesentium doloremque explicabo.</p>
@@ -130,7 +130,7 @@
             <h5 class="card-title">Samsung A70</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 1><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -142,7 +142,7 @@
             <h5 class="card-title">Balón Fútbol</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 2><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@
             <h5 class="card-title">Olla Óster</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 3><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@
             <h5 class="card-title">Persiana</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 4><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -178,7 +178,7 @@
             <h5 class="card-title">Corona Negra</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 5><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -190,7 +190,7 @@
             <h5 class="card-title">Persiana Tela</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 6><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -202,7 +202,7 @@
             <h5 class="card-title">Nevera 700L</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 7><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -214,7 +214,7 @@
             <h5 class="card-title">Olla a Presión</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 8><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -226,7 +226,7 @@
             <h5 class="card-title">Nevera 300L</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 9><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -238,7 +238,7 @@
             <h5 class="card-title">Tenni Nike</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 10><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -250,7 +250,7 @@
             <h5 class="card-title">Olla Acero</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 11><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -262,7 +262,7 @@
             <h5 class="card-title">Samsung A100</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 12><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -274,7 +274,7 @@
             <h5 class="card-title">Tennis Predattor</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 13><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -286,7 +286,7 @@
             <h5 class="card-title">Herramienta</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 14><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
@@ -298,13 +298,31 @@
             <h5 class="card-title">Corona Floral</h5>
             <div class="text-center">
               <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success"><i class="fas fa-cart-plus"></i> Carrito</a>
+              <a href="#" class="btn btn-success id__product" name= 15><i class="fas fa-cart-plus"></i> Carrito</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </main>
+
+  <div class="container mt-2">
+    <nav aria-label="..." class="row">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <span class="page-link">Anterior</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">2</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Siguiente</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
   <div class="bg-dark bg-gradient contenedor__footer">
     <footer class="">
@@ -316,5 +334,21 @@
   </div>
 
   <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+  <script>
+    btns = document.querySelectorAll(".id__product");
+    number = document.querySelectorAll(".carrito");
+    number[0].innerText = 0;
+    let car = [];
+    btns.forEach(btn => {
+      btn.addEventListener('click',()=>{
+        car.push(btn.name);
+        number[0].innerText = car.length;
+      })
+    });
+    
+    console.log(number);
+    
+    
+  </script>
 </body>
 </html>
