@@ -8,7 +8,9 @@ app.secret_key = os.urandom(24)
 @app.route("/home")
 @app.route("/index")
 def home():
-    return render_template("index.html")
+  numItemsFromDB = 15
+
+  return render_template("index.html", data = numItemsFromDB)
 
 if __name__ == '__main__':
 	app.run()
