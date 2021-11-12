@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from forms import RegistroCliente
 import os
 
 app = Flask(__name__)
@@ -13,6 +14,12 @@ def hello_world():
 def api():
 	return render_template("reinaldo.html")
 # Reinaldo test
+
+# Registro Clientes
+@app.route("/registroCliente")
+def registro():
+	frm = RegistroCliente()
+	return render_template("registroCliente.html")
 
 if __name__ == '__main__':
 	app.run()
