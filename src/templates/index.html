@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/logo2.svg" type="image/svg" sizes="40x40">
-    <link rel="stylesheet" href="css/prueba/bootstrap.css">
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/myStyle.css">
+    <link rel="icon" src="{{ url_for('static', filename='img/logo2.svg') }}" type="image/svg" sizes="40x40">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/prueba/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/myStyle.css') }}">
     <title>Isagen</title>
 </head>
 <body>
@@ -17,12 +17,12 @@
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-            <img src="img/logo.svg"  alt="" width="100" height="30" class="d-inline-block align-text-top ms-3">
+            <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="" width="100" height="30" class="d-inline-block align-text-top ms-3">
           </button>
           <div class="row collapse navbar-collapse" id="navbarTogglerDemo01">
             <div class="col-xs-6 col-sm-6 col-md-3 d-none d-sm-block">
                 <a class="navbar-brand ms-2 " href="#">
-                  <img src="img/logo.svg"  alt="" width="200" height="30" class="d-inline-block align-text-top">
+                  <img src="{{ url_for('static', filename='img/logo.svg') }}"  alt="" width="200" height="30" class="d-inline-block align-text-top">
                 </a>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-9 mt-4 mt-lg-0">
@@ -125,7 +125,7 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p1.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p1.jpg') }}"  class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Samsung A70</h5>
             <div class="text-center">
@@ -137,7 +137,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p2.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p2.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Balón Fútbol</h5>
             <div class="text-center">
@@ -149,7 +149,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p3.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p3.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Olla Óster</h5>
             <div class="text-center">
@@ -161,7 +161,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p4.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p4.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Persiana</h5>
             <div class="text-center">
@@ -173,7 +173,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p5.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p5.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Corona Negra</h5>
             <div class="text-center">
@@ -185,7 +185,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p6.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p6.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Persiana Tela</h5>
             <div class="text-center">
@@ -197,7 +197,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p7.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p7.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Nevera 700L</h5>
             <div class="text-center">
@@ -209,7 +209,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p8.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p8.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Olla a Presión</h5>
             <div class="text-center">
@@ -221,7 +221,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p9.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p9.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Nevera 300L</h5>
             <div class="text-center">
@@ -233,7 +233,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p10.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p10.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Tenni Nike</h5>
             <div class="text-center">
@@ -245,7 +245,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p11.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p11.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Olla Acero</h5>
             <div class="text-center">
@@ -257,7 +257,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p12.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p12.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Samsung A100</h5>
             <div class="text-center">
@@ -269,7 +269,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p13.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p13.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Tennis Predattor</h5>
             <div class="text-center">
@@ -281,7 +281,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p14.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p14.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Herramienta</h5>
             <div class="text-center">
@@ -293,7 +293,7 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
         <div class="card">
-          <img src="img/products/p15.jpg" class="card-img-top" alt="img">
+          <img src="{{ url_for('static', filename='img/products/p15.jpg') }}" class="card-img-top" alt="img">
           <div class="card-body text-center">
             <h5 class="card-title">Corona Floral</h5>
             <div class="text-center">
@@ -315,6 +315,6 @@
     </footer>
   </div>
 
-  <script src="js/bootstrap.js"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
 </body>
 </html>

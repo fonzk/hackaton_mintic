@@ -8,6 +8,10 @@ app.secret_key = os.urandom(24)
 def hello_world():
     return render_template("construccion.html")
 
+@app.route("/home")
+def home():
+    return render_template("index.html")
+
 # Reinaldo test
 @app.route("/api")
 def api():
