@@ -1,0 +1,126 @@
+.card{
+  width: 100%;
+  height: 420px;
+  -webkit-box-shadow: -1px 1px 5px 5px rgba(0,0,0,0.41); 
+  box-shadow: -1px 1px 5px 5px rgba(0,0,0,0.41);
+}
+.card img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.carrito{
+  text-decoration: none;
+  font-size: 30px;
+}
+
+.container__header{
+  width: 100%;
+  height: 100%;
+  background-image: url(../img/ondas/darkDown.svg);
+  background-repeat: no-repeat;
+}
+
+.bg__greed{
+  background-color: #41B3B8;
+}
+
+.title h1{
+  font-size: 100px;
+  color: #41B3B8;
+  text-shadow: 2px 2px #000;
+}
+
+.title h2{
+  font-size: 150px;
+  color: #41B3B8;
+  text-shadow: 2px 2px #000;
+}
+
+.modales{
+  height: 500px;
+}
+
+.producto{
+  width: 100%;
+  height: 720px;
+}
+
+.producto .card__producto{
+  width: 100%;
+  height: 700px;
+  margin-top: 5px;
+}
+
+.card__producto img{
+  width: 100%;
+  height: 600px;
+  margin-top: 10px;
+  object-fit: cover;
+}
+
+.contenedor__footer{
+  width: 100%;
+  height: 120px;
+}
+
+footer{
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+footer a{
+  text-decoration: none;
+}
+footer i{
+  text-decoration: none;
+  font-size: 60px;
+  color: #fff;
+  transition: all 300ms;
+}
+footer i:hover{
+  font-size: 70px;
+  color: #41B3B8;
+}
+
+
+
+@media screen and (max-width:760px) {
+  
+  .card{
+    width: 100%;
+    height: 370px;
+    -webkit-box-shadow: -1px 1px 5px 5px rgb(189, 185, 185); 
+  box-shadow: -1px 1px 5px 5px rgb(189, 185, 185);
+  }
+  .card img{
+    width: 100%;
+    height: 250px;
+  }
+
+  
+  .btn__logo{
+    display: block;
+  }
+  .col__menu{
+    margin-left: -200px;
+    transition: all 300ms;
+    -webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -ms-transition: all 300ms;
+    -o-transition: all 300ms;
+  }
+
+  .move__menu{
+    transition: all 300ms;
+    -webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -ms-transition: all 300ms;
+    -o-transition: all 300ms;
+  }
+}
