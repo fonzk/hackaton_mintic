@@ -71,6 +71,7 @@ def actualizar():
 		try:			
 			cedula = escape(request.form.get('cedula')).lower()
 			nombres = escape(request.form.get('nombres')).lower()
+			print(nombres)
 			apellidos = escape(request.form.get('apellidos')).lower()
 			sexo = escape(request.form.get('sexo')).lower()
 			f_nacimiento = escape(request.form.get('f_nacimiento')).lower()
@@ -78,6 +79,7 @@ def actualizar():
 			ciudad = escape(request.form.get('ciudad')).lower()
 			actualizar = request.form.get('Actualizar')
 			if actualizar == 'Actualizar':
+				print('entra a ahcer la query')
 				sql = f"UPDATE Person SET id = ?, Nombres = ?, Apellidos = ?, Sexo = ?, Fecha = ?, Direccion = ?, Ciudad = ? WHERE id = { ced }"
 				response = accion(sql, (cedula, nombres, apellidos, sexo, f_nacimiento, direccion, ciudad))
 				if response != 0:
