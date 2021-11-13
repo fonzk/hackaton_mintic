@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" src="{{ url_for('static', filename='img/logo2.svg') }}" type="image/svg" sizes="40x40">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/prueba/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/myStyle.css') }}">
+    <title>Isagen</title>
+</head>
+<body class="body__login">
+  <form class="box__login" method="POST" action="{{ url_for('validarLogin') }}">
+    <div class="container__logo">
+      <img src="{{ url_for('static', filename='img/logo3.svg') }}" class="logo__isagen" alt="logo2">
+    </div>
+    {{ form.username.label() }}
+    {{ form.username(class="form-control",minlength=5, maxlength=12) }}
+    {{ form.password.label() }}
+    {{ form.password(class="form-control") }}
+    <div class="text-center">
+      <input class="btn btn-success mt-4" type="submit" value="Ingresar">
+    </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-danger mt-md-3 text-center" role="alert">
+        <span><i class="fas fa-exclamation-triangle"></i> </span>{{ message}}
+      </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </form>
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+
+</body>
+</html>

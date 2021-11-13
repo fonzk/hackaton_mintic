@@ -36,9 +36,14 @@
                   </form>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-3 d-flex justify-content-lg-between align-content-center align-item-center mt-2 mt-lg-0">
-                  <span class="icon__car"><i class="fas fa-cart-plus text-success"></i></span><a href="#" class="text-danger carrito">4</a>
+                  <span class="icon__car"><i class="fas fa-cart-plus text-success"></i></span><a href="#" class="text-danger carrito" data-bs-toggle="modal" data-bs-target="#exampleModal2">4</a>
+                  {% if 'username' in session %}
                   <form>
                     <button class="btn btn-danger">Cerrar sesión</button>
+                  </form>
+                  {% endif %}
+                  <form action="{{ url_for('loginForm') }}">
+                    <button class="btn btn-success">Iniciar sesión</button>
                   </form>
                 </div>
               </div>
@@ -115,6 +120,62 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-success"><i class="fas fa-cart-plus"></i> Agregar al Carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  
+  <aside>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="example2" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="example2">Productos agregados al Carrito de Compras</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr class="table-dark">
+                    <th scope="col">#</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">C/u</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Samsung A70</td>
+                    <td>1</td>
+                    <td>$ 1.150.000</td>
+                    <td>$ 1.150.000</td>
+
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Balón Fútbol</td>
+                    <td>2</td>
+                    <td>$ 200.000</td>
+                    <td>$ 400.000</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Olla Óster</td>
+                    <td>3</td>
+                    <td>$ 70.000</td>
+                    <td>$ 210.000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-success"><i class="fas fa-money-check-alt"></i> Comprar</button>
           </div>
         </div>
       </div>
