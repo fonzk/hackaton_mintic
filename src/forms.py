@@ -1,6 +1,5 @@
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField, DateField, SelectField, TextAreaField, StringField
-from wtforms.fields import choices
 from wtforms.validators import InputRequired, EqualTo, DataRequired
 
 class RegistroCliente(FlaskForm):    
