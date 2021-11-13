@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from db import accion, seleccion
 import os, requests
 
@@ -58,51 +58,70 @@ def api():
 
 @app.route("/producto", methods=["GET", "POST"])
 def producto():
+	savedLote = False
+	savedProd = False
+	toShow = False
+	buscarQue = None
+
 	if request.method == "POST":
-		codigoProducto = request.form["codigoProducto"]
-		nombreProducto = request.form["nombreProducto"]
-		numeroLote = request.form["numeroLote"]
-		tipoUnidad = request.form["tipoUnidad"]
-		fechaEntrada = request.form["fechaEntrada"]
-		porcPromo = request.form["porcPromo"]
-		precioUni = request.form["precioUni"]
-		cantidad = request.form["cantidad"]
-		
 		buscar = request.form.get("buscar", False)
 		enviar = request.form.get("enviar", False)
 
 		try:
+			codigoProducto = int(request.form["codigoProducto"])
+			if enviar:
+				nombreProducto = request.form["nombreProducto"]
+				numeroLote = int(request.form["numeroLote"])
+				tipoUnidad = request.form["tipoUnidad"]
+				fechaEntrada = request.form["fechaEntrada"]
+				porcPromo = int(request.form["porcPromo"])
+				precioUni = int(request.form["precioUni"])
+				cantidad = int(request.form["cantidad"])
+		except ValueError as ve:
+			flash(f'La informacion ingresada no es valida o esta incompleta')
+
+		try:
+			url = "https://www.random.org/integers/?num=1&min=1&max=10000&col=1&base=10&format=plain&rnd=new"
+			referencia = requests.get(url).json()
+
 			if buscar:
-				buscarQue = seleccion(f"SELECT COUNT(codigo) FROM Producto WHERE referencia = '{codigoProducto}'")
-				if buscarQue[0][0] > 0:
-					print('ya existe')
-					url = "https://www.random.org/integers/?num=1&min=1&max=10000&col=1&base=10&format=plain&rnd=new"
-					referencia = requests.get(url).json()
+				buscarQue = seleccion(f"SELECT * FROM Producto WHERE referencia = '{codigoProducto}'")
+
+				if len(buscarQue) > 0:
+					#PENDIENTE, aplicar update
+					toShow = True
 				else:
+					toShow = False
 					print('NO existe')
+			
+			elif enviar:
+				insertLote = f"INSERT INTO Lotes (codProducto, fechaEntrada, cantidad) VALUES (?, ?, ?)"
+				resultLote = accion(insertLote, (codigoProducto, fechaEntrada, cantidad))
 
-			'''
-			insertLote = f"INSERT INTO Lotes (codProducto, fechaEntrada, cantidad) VALUES (?, ?, ?)"
-			resultLote = accion(insertLote, (codigoProducto, fechaEntrada, cantidad))
+				if resultLote != 0:
+					savedLote = True
 
-			if resultLote != 0:
-				print("guardadoR")
-			else:
-				print("error guardandoR")
+				# categoria esta en la tabla pero se debe calcular no se lee
+				insertProd = f"INSERT INTO Producto (nombre, tipo, precio, promocion,  referencia) VALUES (?, ?, ?, ?, ?)"
+				resultProd = accion(insertProd, (nombreProducto, tipoUnidad, precioUni, porcPromo, referencia))
 
-			# categoria esta en la tabla pero se debe calcular no se lee
-			insertProd = f"INSERT INTO Producto (nombre, tipo, precio, promocion,  referencia) VALUES (?, ?, ?, ?, ?)"
-			resultProd = accion(insertProd, (nombreProducto, tipoUnidad, precioUni, porcPromo, referencia))
+				if insertProd != 0:
+					savedProd = True
 
-			if insertProd != 0:
-				print("guardadoP")
-			else:
-				print("error guardandoP")
-			'''
+				if savedLote and savedProd:
+					flash(f"Datos guardados con exito")
+				else:
+					flash(f"Error al guardar los datos")
+
 		except Exception as e:
 			print(e)
 
-	return render_template("punto2.html")
+	context = {
+		'toShow' : toShow,
+		'data' : buscarQue
+	}
+
+	return render_template("punto2.html", **context)
 
 if __name__ == '__main__':
 	app.run()
