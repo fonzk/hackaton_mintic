@@ -22,24 +22,9 @@ def producto():
 		fechaEntrada = request.form["fechaEntrada"]
 		porcPromo = request.form["porcPromo"]
 		precioUni = request.form["precioUni"]
-		cantStandLote = request.form["cantStandLote"]
 
-		descForm = request.form.get("descuento")
-		if descForm == "on":
-			descuento = True
-		else:
-			descuento = False
-
-		# print(codigoProducto)
-		# print(nombreProducto)
-		# print(numeroLote)
-		# print(tipoUnidad)
-		# print(fechaEntrada)
-		# print(porcPromo)
-		# print(precioUni)
-		# print(descuento)
-		# print(cantStandLote)
-
+		
+		
 	return render_template("punto2.html")
 
 if __name__ == '__main__':
