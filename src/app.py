@@ -67,31 +67,40 @@ def producto():
 		porcPromo = request.form["porcPromo"]
 		precioUni = request.form["precioUni"]
 		cantidad = request.form["cantidad"]
+		
+		buscar = request.form.get("buscar", False)
+		enviar = request.form.get("enviar", False)
 
-	#PENDIENTE, HAY QUE VALIDAR PRIMERO SI EXISTE O NO???
+		try:
+			if buscar:
+				buscarQue = seleccion(f"SELECT COUNT(codigo) FROM Producto WHERE referencia = '{codigoProducto}'")
+				if buscarQue[0][0] > 0:
+					print('ya existe')
+					url = "https://www.random.org/integers/?num=1&min=1&max=10000&col=1&base=10&format=plain&rnd=new"
+					referencia = requests.get(url).json()
+				else:
+					print('NO existe')
 
-	try:
-		url = "https://www.random.org/integers/?num=1&min=1&max=10000&col=1&base=10&format=plain&rnd=new"
-		referencia = requests.get(url).json()
+			'''
+			insertLote = f"INSERT INTO Lotes (codProducto, fechaEntrada, cantidad) VALUES (?, ?, ?)"
+			resultLote = accion(insertLote, (codigoProducto, fechaEntrada, cantidad))
 
-		insertLote = f"INSERT INTO Lotes (codProducto, fechaEntrada, cantidad) VALUES (?, ?, ?)"
-		resultLote = accion(insertLote, (codigoProducto, fechaEntrada, cantidad))
+			if resultLote != 0:
+				print("guardadoR")
+			else:
+				print("error guardandoR")
 
-		if resultLote != 0:
-			print("guardadoR")
-		else:
-			print("error guardandoR")
+			# categoria esta en la tabla pero se debe calcular no se lee
+			insertProd = f"INSERT INTO Producto (nombre, tipo, precio, promocion,  referencia) VALUES (?, ?, ?, ?, ?)"
+			resultProd = accion(insertProd, (nombreProducto, tipoUnidad, precioUni, porcPromo, referencia))
 
-		# categoria esta en la tabla pero se debe calcular no se lee
-		insertProd = f"INSERT INTO Producto (nombre, tipo, precio, promocion,  referencia) VALUES (?, ?, ?, ?, ?)"
-		resultProd = accion(insertProd, (nombreProducto, tipoUnidad, precioUni, porcPromo, referencia))
-
-		if insertProd != 0:
-			print("guardadoP")
-		else:
-			print("error guardandoP")
-	except Exception as e:
-		print(e)
+			if insertProd != 0:
+				print("guardadoP")
+			else:
+				print("error guardandoP")
+			'''
+		except Exception as e:
+			print(e)
 
 	return render_template("punto2.html")
 
