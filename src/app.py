@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash
 from db import accion, seleccion
-import os, requests
+import os, requests, re
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -67,18 +67,34 @@ def producto():
 		buscar = request.form.get("buscar", False)
 		enviar = request.form.get("enviar", False)
 
-		try:
-			codigoProducto = int(request.form["codigoProducto"])
-			if enviar:
-				nombreProducto = request.form["nombreProducto"].lower()
+		codProd = request.form["codigoProducto"]
+		nomProd = request.form["nombreProducto"]
+		if len(re.findall("\d+", codProd)) != 0:
+			codigoProducto = int(request.form["codProd"])
+			print('codigoProducto')
+		else if len(re.findall("^(?!\s*$).+", nomProd)) != 0:
+			nombreProducto = request.form["nomProd"].lower()
+			print('nombreProducto')
+		
+		if enviar:
+			try:
 				numeroLote = int(request.form["numeroLote"])
 				tipoUnidad = request.form["tipoUnidad"].lower()
 				fechaEntrada = request.form["fechaEntrada"].lower()
 				porcPromo = int(request.form["porcPromo"])
 				precioUni = int(request.form["precioUni"])
 				cantidad = int(request.form["cantidad"])
-		except ValueError as ve:
-			flash(f'La informacion ingresada no es valida o esta incompleta')
+			except ValueError as ve:
+				flash(f'La informacion ingresada no es valida o esta incompleta')
+			
+			codigoProducto
+			nombreProducto
+			numeroLote
+			tipoUnidad
+			fechaEntrada
+			porcPromo
+			precioUni
+			cantidad
 
 		try:
 			url = "https://www.random.org/integers/?num=1&min=1&max=10000&col=1&base=10&format=plain&rnd=new"
@@ -93,6 +109,16 @@ def producto():
 				else:
 					toShow = False
 					print('NO existe')
+
+				if len(nombreProducto) > 0:
+					'''
+					sql = f"SELECT usuarios.nombre, usuarios.apellido, comentarios.comentario, comentarios.calificacion, habitaciones.numero_habitacion, habitaciones.caracteristicas FROM comentarios INNER JOIN usuarios ON comentarios.identificacion = usuarios.numero_documento INNER JOIN habitaciones ON habitaciones.numero_habitacion = comentarios.habitacion"
+					'''
+					matchQue = seleccion(f"SELECT * FROM Producto WHERE nombre LIKE '%{nombreProducto}%'")
+					if len(matchQue) > 0:
+						print(f'matchQue {matchQue}')
+					else:
+						print(f'matchQue ELSE')
 			
 			elif enviar:
 				insertLote = f"INSERT INTO Lotes (codProducto, fechaEntrada, cantidad) VALUES (?, ?, ?)"
