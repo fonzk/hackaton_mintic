@@ -12,7 +12,6 @@
 <body>
 	<br>
 	<br>
-	<br>
 	<div class="container">
 		<form class="row g-3" action="{{ url_for('producto') }}" method="POST">
 			<div class="row">
@@ -56,6 +55,7 @@
 				<button type="submit" class="btn btn-primary" name="enviar" value="enviar">Enviar</button>
 			</div>
 		</form>
+		<br>
 
 		{% with messages = get_flashed_messages() %}
 			{% if messages %}
