@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" src="{{ url_for('static', filename='img/logo2.svg') }}" type="image/svg" sizes="40x40">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/prueba/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/myStyle.css') }}">
+        <title>Isagen</title>
+    </head>
+    <body class="container-fluid bg__admin">
+        <nav class="row bg-dark bg-gradient">
+            <div class="col-sm-12 col-md-6">
+                <img src="{{ url_for('static', filename='img/logo.svg') }}" class="ms-5" alt="logo" width="250" height="100">
+            </div>
+            <div class="col-sm-12 col-md-6 text-white text-capitalize d-md-flex flex-row-reverse align-content-center align-items-center">
+                <a href="#" title="Cerrar Sesión">
+                    <img src="{{ url_for('static', filename='img/logo2.svg') }}" alt="" width="55" height="55">
+                </a>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <main>
+                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+                        <ul class="nav nav-pills flex-column mb-auto">
+                            <li class="buttons">
+                                <a href="home" class="nav-link text-white" aria-current="page">
+                                <i class="fas fa-car"></i>
+                                Inicio
+                                </a>
+                            </li>
+                            <li class="buttons">
+                                <a href="user" class="nav-link text-white">
+                                <i class="fas fa-users"></i>
+                                Usuarios
+                                </a>
+                            </li>
+                            <!-- {% if 'rol' in session %}
+                            {% with rol = session['rol']%}
+                            {% if rol !=3 %}
+                            <li class="buttons">
+                                <a href="#" class="nav-link text-white">
+                                <i class="fas fa-users"></i>
+                                Usuarios
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endwith %}
+                            {% endif %} -->
+                            <li class="buttons">
+                                <a href="#" class="nav-link text-white">
+                                <i class="fas fa-store"></i>
+                                Productos
+                                </a>
+                            </li>
+                            <li class="buttons">
+                                <a href="#" class="nav-link text-white">
+                                <i class="fab fa-product-hunt"></i>
+                                Proveedores
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="b-example-divider"></div>
+                </main>
+            </div>
+            <article class="col-sm-12 col-md-10 bg-light">
+                <div class="container-fluid card__content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </article>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+        <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+        {% block finalScript %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,359 @@
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+    <div class="row p-2">
+        <form method="POST" id="crear-user"  action="/usuarios/actualizar/{{datos[0][0]}}" >
+            {{ form.hidden_tag() }}
+            <div class="row text-start">
+                <div class="text-center mt-md-3">
+                    <h1>Editar Usuario</h1>
+                </div>
+                <hr>
+                <div class="text-center mt-md-3">
+                    <h5 class="text-danger">Datos Personales</h5>
+                </div>
+                <div class="col-sm-12 col-md-6 mt-2 ">
+                    {{ form.nombres.label() }}
+                    <input type="text" class="form-control" id="nombres" name="nombres" value="{{datos[0][1]}}" minlength=5, maxlength=30 required>
+                    <div class="alert alert-danger form-control-sm mt-2 ocultar" id="nombres-form" role="alert">
+                        <i class="fas fa-times"></i> El nombre, no debe caracteres especiales
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 mt-2">
+                    {{ form.apellidos.label() }}
+                    <input type="text" class="form-control" name="apellidos" id="apellidos" value="{{datos[0][2]}}" minlength=5, maxlength=30 required>
+                    <div class="alert alert-danger form-control-sm mt-md-2 ocultar" id="apellidos-form" role="alert">
+                        <i class="fas fa-times"></i> Los apellidos, no debe caracteres especiales
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 mt-2">
+                    {{ form.tipo_documento.label() }}
+                    <ul id="tipo_documento" >
+                        <li>
+                            <input checked id="tipo_documento-3" name="tipo_documento"  type="radio" value="{{datos[0][3]}}"> 
+                            <label for="tipo_documento-3">{{datos[0][3]}}</label>
+                        </li>
+                        <li>
+                            <input id="tipo_documento-0" name="tipo_documento" type="radio" value="C.C"> 
+                            <label for="tipo_documento-0">C.C</label>
+                        </li>
+                        <li>
+                            <input id="tipo_documento-1" name="tipo_documento" type="radio" value="T.I"> 
+                            <label for="tipo_documento-1">T.I</label>
+                        </li>
+                        <li>
+                            <input id="tipo_documento-2" name="tipo_documento" type="radio" value="C.E"> 
+                            <label for="tipo_documento-2">C.E</label>
+                        </li>
+                    </ul>
+                    <!-- {{ form.tipo_documento() }} -->
+                </div>
+                <div class="col-sm-12 col-md-6 mt-2">
+                    {{ form.numero_documento.label() }}
+                    <input type="text" class="form-control" name="numero_documento" id="numero_documento" value="{{datos[0][4]}}" minlength=5, maxlength=30 required>
+                    <div class="alert alert-danger form-control-sm mt-2 ocultar" id="num-documento-form" role="alert">
+                        <i class="fas fa-times"></i> Ingresa un número de cédula válido sin puntos ni espacios
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 mt-2">
+                    {{ form.email.label() }}
+                    <input type="text" class="form-control" name="email" id="email" value="{{datos[0][5]}}" minlength=5, maxlength=30 required>
+                    <div class="alert alert-danger form-control-sm mt-2 ocultar" id="email-form" role="alert">
+                        <i class="fas fa-times"></i> Ingresa un email válido
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 mt-2">
+                    {{ form.celular.label() }}
+                    <input type="text" class="form-control"  name="celular" id="celular" value="{{datos[0][6]}}" minlength=5, maxlength=30 required>
+                    <div class="alert alert-danger form-control-sm mt-2 ocultar" id="celular-form" role="alert">
+                        <i class="fas fa-times"></i> Ingresa un celular válido
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 mt-2">
+                    {{ form.direccion.label() }}
+                    <input type="text" class="form-control"  name="direccion" id="direccion" value="{{datos[0][7]}}" minlength=5, maxlength=30 required>
+                    
+                </div>
+            </div>
+            <hr>
+            <div class="row text-start">
+                <div class="text-center">
+                    <h5 class="text-danger">Datos Usuario del Sistema</h5>
+                </div>
+                <div class="col-sm-12 col-md-6 mt-2">
+                    {{ form.username.label() }}
+                    <input type="text" class="form-control"  name="username" id="username" value="{{datos[0][8]}}" minlength=5, maxlength=30 required>
+                    <div class="alert alert-danger form-control-sm mt-2 ocultar" id="username-form" role="alert">
+                        <i class="fas fa-times"></i>Mínimo 6 caracteres sin espacios, se permiten guiones bajos
+                    </div>
+                    <div class="alert alert-danger form-control-sm mt-2 ocultar" id="username-busy-form" role="alert">
+                        <i class="fas fa-times"></i> El nombre de usuario ya está en uso
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 mt-2">
+                    {{ form.password.label() }}
+                    <input class="form-control"  name="password" id="password" maxlength="12" minlength="5" name="password" type="password" value="">
+                    <div class="alert alert-danger form-control-sm mt-2 ocultar" id="password-form" role="alert">
+                        <i class="fas fa-times"></i> La contraseña debe tener entre 8 y 16 caracteres, al menos un número, al menos una minúscula y al menos una mayúscula.
+                        NO puede tener otros símbolos.
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 mt-2">
+                    {{ form.confirm_password.label() }}
+                    <input class="form-control" name="confirm_password" id="confirm_password" maxlength="12" minlength="5" name="confirm_password" type="password" value="">
+                    <div class="alert alert-danger form-control-sm mt-2 ocultar" id="confirm_password-form" role="alert">
+                        <i class="fas fa-times"></i> Las contraseña no coinciden.
+                    </div>
+                </div>
+                <div class="col -sm-12 col-md-6 mt-2">
+                    {{ form.roles.label() }}
+                    <select class="form-control" name="roles" id="roles" maxlength="12" minlength="5" name="roles">
+                        <option selected value="{{datos[0][12]}}">{{datos[0][13]}}</option>
+                        <option value="1">Administrador</option>
+                        <option value="2">Super Administrador</option>
+                        <option value="3">Usuario Final</option>
+                    </select>
+                </div>
+                <hr class="mt-md-4">
+                <div class="col-sm-12 col-md-12 mt-2">
+                    {{ form.autorizacion.label() }}
+                    {{ form.autorizacion() }}
+                </div>
+                <div class="col-sm-12 alert alert-danger form-control-sm mt-2 ocultar" id="data-form" role="alert">
+                    <i class="fas fa-times"></i> Faltan campos por llenar correctamente.
+                </div>
+            </div>
+            <hr class="mt-2 mb-3">
+            <div class="text-end mb-4">
+                <a href="/usuarios" class="btn btn-danger">Cancelar</a>
+                <a  class="btn btn-primary" id="validar-form" onclick="prueba()">Validar registro</a>
+                {{ form.actualizar(class="btn btn-success ocultar") }}
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block finalScript %}
+    <script>
+        let formUser =  document.querySelectorAll("#crear-user");
+        let errors = {
+            nombres : 0,
+            apellidos: 0,
+            numero_documento:0,
+            email : 0,
+            celular : 0,
+            username : 0,
+            password : 0,
+            confirm_password : 0
+        };
+     
+        function validatioForm(valor,data){
+            switch (valor) {
+                case 1:
+                    var cadena = formUser[0][data[0]].value;
+                    var expresion = /^[A-Za-z0-9\s]+$/g; //con espacio ---> /^[A-Za-z0-9\s]+$/g
+                    var result = expresion.test(cadena);
+                    if(!result){
+                        if(data[0]=='nombres'){
+                            document.getElementById(data[1]).classList.remove('ocultar');
+                            if(errors['nombres']==0){
+                                errors['nombres']= 1;
+                            }
+                        }else{
+                            document.getElementById(data[1]).classList.remove('ocultar');
+                            if(errors['apellidos']==0){
+                                errors['apellidos']= 1;
+                            }
+                        }
+                    }else{
+                        if(data[0]=='nombres'){
+                            document.getElementById(data[1]).classList.add('ocultar');
+                            if(errors['nombres']==1){
+                                errors['nombres']= 0;
+                            }
+                        }else{
+                            document.getElementById(data[1]).classList.add('ocultar');
+                            if(errors['apellidos']==1){
+                                errors['apellidos']= 0;
+                            }
+                        }
+                    }
+                    break;
+
+                case 2:
+                    var cadena = formUser[0][data[0]].value;
+                    var expresion = /^\d*$/; //con espacio ---> /^[A-Za-z0-9\s]+$/g
+                    var result = expresion.test(cadena);
+                    if(!result){
+                        document.getElementById(data[1]).classList.remove('ocultar');
+                        if(errors['numero_documento']==0){
+                            errors['numero_documento']= 1;
+                        }
+                    }else{
+                        document.getElementById(data[1]).classList.add('ocultar');
+                        if(errors['numero_documento']==1){
+                            errors['numero_documento']= 0;
+                        }
+                    }
+                    break;
+
+                case 3:
+                    var cadena = formUser[0][data[0]].value;
+                    var expresion = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/; //con espacio ---> /^[A-Za-z0-9\s]+$/g
+                    var result = expresion.test(cadena);
+                    if(!result){
+                        document.getElementById(data[1]).classList.remove('ocultar');
+                        if(errors['email']==0){
+                            errors['email']= 1;
+                        }
+                    }else{
+                        document.getElementById(data[1]).classList.add('ocultar');
+                        if(errors['email']==1){
+                            errors['email']= 0;
+                        }
+                        console.log(errors);
+                    }
+                    break;
+
+                case 4:
+                    var cadena = formUser[0][data[0]].value;
+                    var expresion =/^[\(]?[\+]?(\d{2}|\d{3})[\)]?[\s]?((\d{6}|\d{8})|(\d{3}[\*\.\-\s]){2}\d{3}|(\d{2}[\*\.\-\s]){3}\d{2}|(\d{4}[\*\.\-\s]){1}\d{4})|\d{8}|\d{10}|\d{12}$/;
+                    var result = expresion.test(cadena);
+                    if(!result){
+                        document.getElementById(data[1]).classList.remove('ocultar');
+                        if(errors['celular']==0){
+                            errors['celular']= 1;
+                        }
+                    }else{
+                        document.getElementById(data[1]).classList.add('ocultar');
+                        if(errors['celular']==1){
+                            errors['celular']= 0;
+                        }
+                    }
+                    break;
+                
+                case 5:
+                    var cadena = formUser[0][data[0]].value;
+                    var expresion =/^(?=[a-zA-Z0-9._]{6,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
+                    var result = expresion.test(cadena);
+                    if(!result){
+                        document.getElementById(data[1]).classList.remove('ocultar');
+                        if(errors['username']==0){
+                            errors['username']= 1;
+                        }
+                    }else{
+                        document.getElementById(data[1]).classList.add('ocultar');
+                        if(errors['username']==1){
+                            errors['username']= 0;
+                        }
+                    }
+                    break;
+
+                case 6:
+                    var cadena = formUser[0][data[0]].value;
+                    var expresion =/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
+                    var result = expresion.test(cadena);
+                    if(data[2]==1){
+                        if(!result){
+                        document.getElementById(data[1]).classList.remove('ocultar');
+                        if(errors['password']==0){
+                            errors['password']= 1;
+                        }
+                        }else{
+                            document.getElementById(data[1]).classList.add('ocultar');
+                            if(errors['password']==1){
+                            errors['password']= 0;
+                        }
+                        }
+                    }else{
+                        var passwor = formUser[0]['password'].value;
+                        var confirm_passwor = formUser[0]['confirm_password'].value;
+                        if(passwor != confirm_passwor){
+                            document.getElementById(data[1]).classList.remove('ocultar');
+                            if(errors['confirm_password']==0){
+                            errors['confirm_password']= 1;
+                        }
+                        }else{
+                            document.getElementById(data[1]).classList.add('ocultar');
+                            if(errors['confirm_password']==1){
+                            errors['confirm_password']= 0;
+                        }
+                        }
+                    }
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+        // validacion del formulario para la creacion de usuarios
+        formUser[0]['username'].addEventListener('focus', ()=>{
+            document.getElementById('username-busy-form').classList.add('ocultar');
+        }); 
+        formUser[0]['nombres'].addEventListener('blur', ()=>{
+            validatioForm(1,data=['nombres','nombres-form']);
+        });
+        formUser[0]['apellidos'].addEventListener('blur', ()=>{
+            validatioForm(1,data=['apellidos','apellidos-form']);
+        });
+
+        formUser[0]['numero_documento'].addEventListener('blur', ()=>{
+            validatioForm(2,data=['numero_documento','num-documento-form']);
+        });
+
+        formUser[0]['email'].addEventListener('blur', ()=>{
+            validatioForm(3,data=['email','email-form']);
+        });
+
+        formUser[0]['celular'].addEventListener('blur', ()=>{
+            validatioForm(4,data=['celular','celular-form']);
+        });
+
+        formUser[0]['username'].addEventListener('blur', ()=>{
+            validatioForm(5,data=['username','username-form']);
+        });
+
+        formUser[0]['password'].addEventListener('blur', ()=>{
+            validatioForm(6,data=['password','password-form',1]);
+        });
+
+        formUser[0]['confirm_password'].addEventListener('blur', ()=>{
+            validatioForm(6,data=['confirm_password','confirm_password-form',2]);
+        });
+        
+        function validarUsername(){
+            $.ajax({
+                url : '/username/',
+                data : $('form').serialize(),
+                type : 'POST',
+                success : function(response){
+                    console.log(response);
+                    if(response=='username free'){
+                        document.getElementById('data-form').classList.add('ocultar')
+                        document.getElementById('validar-form').classList.add('ocultar')
+                        // document.getElementById('actualizar').classList.remove('ocultar')
+                    }else{
+                        document.getElementById('username-busy-form').classList.remove('ocultar')
+                    }
+                }
+            });
+        }
+        function prueba(){
+            event.preventDefault();
+
+            if(errors['nombres']==0 && errors['apellidos']==0 && errors['numero_documento']==0 && 
+                errors['email']==0 && errors['celular']==0 && errors['username']==0 && errors['password']==0 && 
+                errors['confirm_password']==0 && formUser[0]['nombres'].value && formUser[0]['apellidos'].value && 
+                formUser[0]['numero_documento'].value && formUser[0]['email'].value && formUser[0]['celular'].value &&
+                formUser[0]['username'].value){
+                    document.getElementById('data-form').classList.add('ocultar')
+                    document.getElementById('validar-form').classList.add('ocultar')
+                    document.getElementById('actualizar').classList.remove('ocultar')
+            }else{
+                document.getElementById('data-form').classList.remove('ocultar')
+            }
+
+        };
+       
+    </script>
+{% endblock %}
