@@ -11,41 +11,40 @@
 <body>
 		<div class="container">
 			<form class="row g-3" action="{{ url_for('producto') }}" method="POST">
-				<div class="col-md-2">
+				<!-- <div class="col-md"> rows </div> -->
+				<div class="form-floating col-md-2">
 					<input type="text" class="form-control" id="codigoProducto" name="codigoProducto" placeholder="Codigo del producto">
+					<label for="codigoProducto">Codigo del producto</label>
 				</div>
-				<div class="col-md-4">
+				<div class="form-floating col-md-4">
 					<input type="text" class="form-control" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto">
+					<label for="nombreProducto">Nombre del producto</label>
 				</div>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="numeroLote" name="numeroLote" placeholder="Numero del lote">
+				<div class="form-floating col-md-2">
+					<input type="text" class="form-control" id="tipoUnidad" name="numeroLote" placeholder="Numero del lote">
+					<label for="numeroLote">Numero del lote</label>
 				</div>
-				<div class="col-md-2">
+				<div class="form-floating col-md-2">
 					<input type="text" class="form-control" id="tipoUnidad" name="tipoUnidad" placeholder="Tipo unidad">
+					<label for="tipoUnidad">Tipo unidad</label>
 				</div>
-				<div class="col-md-2">
+				<div class="form-floating col-md-2">
 					<input type="date" class="form-control" id="fechaEntrada" name="fechaEntrada" placeholder="Fecha de entrada">
+					<label for="fechaEntrada">Fecha de entrada</label>
 				</div>
-				<div class="col-md-2">
+				<div class="form-floating col-md-2">
 					<input type="text" class="form-control" id="porcPromo" name="porcPromo" placeholder="Porcentaje promocion">
+					<label for="porcPromo">Porcentaje promocion</label>
 				</div>
-				<div class="col-md-3">
+				<div class="form-floating col-md-3">
 					<input type="text" class="form-control" id="precioUni" name="precioUni" placeholder="Precio unitario">
+					<label for="precioUni">Precio unitario</label>
 				</div>
-				<!-- <div class="col-md-2">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" id="descuento" name="descuento">
-						<label class="form-check-label" for="descuento" placeholder="">
-							Aplica descuento
-						</label>
-					</div>
-				</div> -->
-				<!-- <div class="col-md-3">
-					<div class="col">
-						<input type="text" class="form-control" id="cantStandLote" name="cantStandLote" placeholder="Cantidad descuento">
-					</div> -->
+				<div class="form-floating col-md-3">
+					<input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
+					<label for="cantidad">Cantidad</label>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 btn btn-primary btn-lg">
 					<button type="submit" class="btn btn-primary">Enviar</button>
 				</div>
 			</form>

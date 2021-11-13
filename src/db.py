@@ -1,5 +1,5 @@
 import sqlite3
-DB_URL = 'DB/DB.db'
+DB_URL = 'db/DB.db'
 
 def accion(sql, data) -> int:
 	""" Se encarga de ejecutar una consulta de accion (INSERT, DELETE, UPDATE) """
