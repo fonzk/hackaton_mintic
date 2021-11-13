@@ -1,12 +1,15 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, SubmitField, DateField, SelectField, TextAreaField
-# from wtforms.fields.html5 import EmailField
-from wtforms.validators import InputRequired, EqualTo
+from wtforms import PasswordField, SubmitField, DateField, SelectField, TextAreaField, StringField
+from wtforms import validators
+from wtforms.validators import InputRequired, EqualTo, DataRequired
 
 class RegistroCliente(FlaskForm):    
-	nombre = TextAreaField('Nombre')
-	apellido = TextAreaField('Apellido')
-	tipoDoc = SelectField(u'Tipo de documento', choices=[('Cedula'), ('Pasaporte'), ('Cedula de extranjeria')])
-	documento = TextAreaField('Documento')
-	guardar = SubmitField('Guardar')
-	actuali = SubmitField('Actualizar')
+	cedula = StringField('Cedula', validators=[DataRequired()])
+	nombre = StringField('Nombre y Apellido', validators=[DataRequired()])
+	sexo = StringField('Sexo', validators=[DataRequired()])
+	f_nacimiento = DateField('Fecha de Nacimiento', validators=[DataRequired()])
+	direccion = StringField('Direccion', validators=[DataRequired()])
+	ciudad = StringField('Ciudad', validators=[DataRequired()])
+	usuario = StringField('Usuario', validators=[DataRequired()])
+	clave = PasswordField('Clave', validators=[DataRequired()])
+	registrar = SubmitField('Registrar')
