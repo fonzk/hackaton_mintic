@@ -19,13 +19,13 @@
 					<input type="text" class="form-control" id="codigoProducto" name="codigoProducto" placeholder="Codigo del producto">
 					<label for="codigoProducto">Codigo del producto</label>
 				</div>
+				<div class="form-floating col-md-4">
+					<input type="text" class="form-control" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto">
+					<label for="nombreProducto">Nombre del producto</label>
+				</div>
 				<div class="col-md-2 btn btn-primary btn-lg">
 					<button type="submit" class="btn btn-primary" name="buscar" value="buscar">Buscar</button>
 				</div>
-			</div>
-			<div class="form-floating col-md-4">
-				<input type="text" class="form-control" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto">
-				<label for="nombreProducto">Nombre del producto</label>
 			</div>
 			<div class="form-floating col-md-2">
 				<input type="text" class="form-control" id="tipoUnidad" name="numeroLote" placeholder="Numero del lote">
@@ -68,16 +68,16 @@
 		{% endwith %}
 
 		{% if toShow %}
-			<div style="height: 300px; overflow: scroll;">
+			<div style="height: 300px; overflow-x: hidden; overflow-y: auto;">
 				<table class="table table-striped table-bordered table-sm">
 					<thead>
 						<tr>
-							<th scope="col-2">Nombres</th>
-							<th scope="col-2">Apellidos</th>
-							<th scope="col-1">Habitacion</th>
-							<th scope="col-2">Tipo hab.</th>
-							<th scope="col-4">Comentario</th>
-							<th scope="col-1">Calificacion</th>
+							<th scope="col-2">Codigo Prod.</th>
+							<th scope="col-2">Nombre Prod.</th>
+							<th scope="col-1">% Descuento</th>
+							<th scope="col-2">Categoria</th>
+							<th scope="col-4">Tipo Uni.</th>
+							<th scope="col-1">Precio</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -92,38 +92,6 @@
 								<!-- row[3] lo quite, pero sirve que sea igual a como esta en  -->
 							</tr>
 						{% endfor %}
-
-						<tr>
-							<td>Tiger Nixon</td>
-							<td>System Architect</td>
-							<td>Edinburgh</td>
-							<td>61</td>
-							<td>2011/04/25</td>
-							<td>$320,800</td>
-						</tr>
-						<tr>
-							<td>Shad Decker</td>
-							<td>Regional Director</td>
-							<td>Edinburgh</td>
-							<td>51</td>
-							<td>2008/11/13</td>
-							<td>$183,000</td>
-						</tr>
-						<tr>
-							<td>Michael Bruce</td>
-							<td>Javascript Developer</td>
-							<td>Singapore</td>
-							<td>29</td>
-							<td>2011/06/27</td>
-							<td>$183,000</td>
-						</tr>
-						<tr>
-							<td>Donna Snider</td>
-							<td>Customer Support</td>
-							<td>New York</td>
-							<td>27</td>
-							<td>2011/01/25</td>
-							<td>$112,000</td>
 						</tr>
 					</tbody>
 				</table>
