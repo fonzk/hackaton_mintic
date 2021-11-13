@@ -1,0 +1,98 @@
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+    <div class="text-center mt-2">
+        <h1>Alerta Productos Mínimo</h1>
+    </div>
+    <hr>
+    <div class="row mt-md-5 table-productos">
+        <div class="col-sm-12 text-danger">
+            <h3>Productos por debajo del mínimo</h3>
+        </div>
+        <div class="col-sm-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">Producto</th>
+                        <th scope="col">Nombre Producto</th>
+                        <th scope="col">Cantidad Mínima</th>
+                        <th scope="col">Cantidad Actual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in datos %}
+                    <tr>
+                        <td>
+                            <div>
+                                <img src="{{ url_for('static', filename=product.7) }}" alt="">
+                            </div>
+                        </td>
+                        <td>{{ product.1}}</td>
+                        <td>{{ product.3 }}</td>
+                        <td>{{ product.4 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class=" col-sm-12 p-2">
+                {% if messageRes %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ messageRes}}<strong><i class="fas fa-check-circle"></i></strong>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3 table-productos">
+        <div class="col-sm-12 text-warning">
+            <h3>Productos cerca del mínimo</h3>
+        </div>
+        <div class="col-sm-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">Producto</th>
+                        <th scope="col">Nombre Producto</th>
+                        <th scope="col">Cantidad Mínima</th>
+                        <th scope="col">Cantidad Actual</th>
+                        <th scope="col">Diferencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in datos2 %}
+                    <tr>
+                        <th scope="row">
+                            <div>
+                                <img src="{{ url_for('static', filename=product.0) }}" alt="">
+                            </div>
+                        </th>
+                        <td>{{ product.1}}</td>
+                        <td>{{ product.2 }}</td>
+                        <td>{{ product.3 }}</td>
+                        <td>{{ product.4 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class=" col-sm-12 p-2">
+                {% if messageRes2 %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ messageRes2 }}<strong><i class="fas fa-check-circle"></i></strong>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block finalScript %}
+    <script>
+        let btns = document.querySelectorAll(".buttons");
+        btns.forEach(btn => {
+            btn => btn.classList.remove('active');
+        });
+        btns[0].classList.add('active');
+        
+    </script>
+{% endblock %}
