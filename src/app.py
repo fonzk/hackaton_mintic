@@ -70,10 +70,10 @@ def producto():
 		try:
 			codigoProducto = int(request.form["codigoProducto"])
 			if enviar:
-				nombreProducto = request.form["nombreProducto"]
+				nombreProducto = request.form["nombreProducto"].lower()
 				numeroLote = int(request.form["numeroLote"])
-				tipoUnidad = request.form["tipoUnidad"]
-				fechaEntrada = request.form["fechaEntrada"]
+				tipoUnidad = request.form["tipoUnidad"].lower()
+				fechaEntrada = request.form["fechaEntrada"].lower()
 				porcPromo = int(request.form["porcPromo"])
 				precioUni = int(request.form["precioUni"])
 				cantidad = int(request.form["cantidad"])
