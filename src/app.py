@@ -4,15 +4,12 @@ from flask.helpers import flash, url_for
 from werkzeug.utils import secure_filename
 from werkzeug.wrappers import response
 from wtforms.i18n import messages_path
-from formularios import FormPart, Login
+from formularios import FormPart, Login, RegistroCliente, ActualizaCliente, CambioClave
 from markupsafe import escape
-from db import consult_action, consult_select
 from werkzeug.security import check_password_hash, generate_password_hash
 import os, requests, re
 from db import accion, seleccion
-
-from forms import RegistroCliente, ActualizaCliente, CambioClave
-from db import accion, seleccion
+from db import consult_action, consult_select
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -35,53 +32,55 @@ def loginForm():
 @app.route('/validarLogin',methods=["GET","POST"])
 def validarLogin():
     #recuperacion de datos
-    if request.method == "POST" :
-        user = escape(request.form['username'].strip()).lower()
-        pwd = escape(request.form['password'].strip())
-        print(user,pwd)
-        #preparamos para consultar si el usuario existe
-        sql = f"SELECT * FROM Person WHERE username = '{user}'"
-        #realizamos la consulta
-        res = consult_select(sql)
-        print(res)
-        #si el usuario existe traemos los datos para crear la sesion
-        if len(res)!=0:
-            sql2 = f"SELECT contra, id, Nombres, Apellidos, username, rol, sexo ,activo FROM Person WHERE username = '{user}'"
-            res2 = consult_select(sql2)
-            passw = res2[0][0]
-            activo = res2[0][4]
-            confirmPassword = check_password_hash(passw,pwd)
-            if confirmPassword == True and activo == 'si':
-                #si el usuario y la password son correctos creamos la session y lo enviamos al dashboard
-                session['name'] = res2[0][1]
-                session['userName'] = res2[0][4]
-                session['rol'] = res2[0][5]
-                sql = "SELECT * FROM Producto"
-                res = consult_select(sql)
-                if len(res)!= 0:
-                    return render_template('contents/home.html',datos=res)
-                else :
-                    messageRes = "No existen productos registrados"
-                    return render_template('admin.html',messageRes=messageRes)
-            else :
-                #si el usuario no existe lo redirigimos al login
-                flash('Usuario o Contraseña incorrectos')
-                return redirect('/login')
-        else :
-            #si el usuario no existe lo redirigimos al login
-            flash('Usuario o Contraseña incorrectos')
-            return redirect('/login')
-    else :
-        if 'userName' and 'rol' in session :
-            sql = "SELECT * FROM Producto"
-            res = consult_select(sql)
-            if len(res)!= 0:
-                return render_template('contents/home.html',datos=res)
-            else :
-                messageRes = " No existen productos registrados"
-                return render_template('admin.html',messageRes=messageRes)
-        else :
-            return redirect(url_for('/login'))
+	if request.method == "POST" :
+		user = escape(request.form['username'].strip()).lower()
+		pwd = escape(request.form['password'].strip())
+		#preparamos para consultar si el usuario existe
+		sql = f"SELECT * FROM Person WHERE username = '{user}'"
+		#realizamos la consulta
+		res = consult_select(sql)
+		#si el usuario existe traemos los datos para crear la sesion
+		if len(res)!=0:
+			sql2 = f"SELECT * FROM Person WHERE username = '{user}'"
+			res2 = consult_select(sql2)
+			print(res2)
+			passw = res2[0][8]
+			activo = res2[0][11]
+			confirmPassword = check_password_hash(passw,pwd)
+			print(passw,activo)
+			if confirmPassword == True and activo == 1:
+				#si el usuario y la password son correctos creamos la session y lo enviamos al dashboard
+				session['name'] = res2[0][1]
+				session['userName'] = res2[0][4]
+				session['rol'] = res2[0][5]
+				datos = [()]
+				return render_template('admin.html',datos=res)
+				# sql = "SELECT * FROM Producto"
+				# res = consult_select(sql)
+				# if len(res)!= 0:
+				# 	return render_template('contents/home.html',datos=res)
+				# else :
+				# 	messageRes = "No existen productos registrados"
+				# 	return render_template('admin.html',messageRes=messageRes)
+			else :
+				#si el usuario no existe lo redirigimos al login
+				flash('Usuario o Contraseña incorrectos')
+				return redirect('/login')
+		else :
+			#si el usuario no existe lo redirigimos al login
+			flash('Usuario o Contraseña incorrectos')
+			return redirect('/login')
+	else :
+		if 'userName' and 'rol' in session :
+			sql = "SELECT * FROM Producto"
+			res = consult_select(sql)
+			if len(res)!= 0:
+				return render_template('contents/home.html',datos=res)
+			else:
+				messageRes = " No existen productos registrados"
+				return render_template('admin.html',messageRes=messageRes)
+		else :
+			return redirect(url_for('/login'))
 
 @app.route("/user")
 def user():
@@ -268,15 +267,16 @@ def producto():
 
 		elif buscar and nombreProducto != None:
 			try:
-				if len(nombreProducto) > 0:
-					'''
-					sql = f"SELECT usuarios.nombre, usuarios.apellido, comentarios.comentario, comentarios.calificacion, habitaciones.numero_habitacion, habitaciones.caracteristicas FROM comentarios INNER JOIN usuarios ON comentarios.identificacion = usuarios.numero_documento INNER JOIN habitaciones ON habitaciones.numero_habitacion = comentarios.habitacion"
-					'''
-					matchQue = seleccion(f"SELECT * FROM Producto WHERE nombre LIKE '%{nombreProducto}%'")
-					if len(matchQue) > 0:
-						print(f'matchQue {matchQue}')
-					else:
-						print(f'matchQue ELSE')
+				'''
+				sql = f"SELECT usuarios.nombre, usuarios.apellido, comentarios.comentario, comentarios.calificacion, habitaciones.numero_habitacion, habitaciones.caracteristicas FROM comentarios INNER JOIN usuarios ON comentarios.identificacion = usuarios.numero_documento INNER JOIN habitaciones ON habitaciones.numero_habitacion = comentarios.habitacion"
+				'''
+				buscarQue = seleccion(f"SELECT * FROM Producto WHERE nombre LIKE '%{nombreProducto}%'")
+				if len(buscarQue) > 0:
+					toShow = True
+					print(f'matchQue {buscarQue}')
+				else:
+					toShow = False
+					print(f'matchQue ELSE')
 			except Exception as e:
 				print(e)
 				
