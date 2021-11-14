@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request, jsonify, redirect, session, url_for,flash
+from flask import Flask, render_template, request, jsonify, redirect, session, url_for, flash
 from flask.helpers import flash, url_for
 from werkzeug.utils import secure_filename
 from werkzeug.wrappers import response
@@ -8,27 +8,23 @@ from formularios import FormPart, Login
 from markupsafe import escape
 from db import consult_action, consult_select
 from werkzeug.security import check_password_hash, generate_password_hash
-import os
-
+import os, requests, re
+from db import accion, seleccion
 
 from forms import RegistroCliente, ActualizaCliente, CambioClave
 from db import accion, seleccion
-# from flask import Flask, render_template
-# import os
-
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.url_map.strict_slashes = False
 
 @app.route("/")
-def hello_world():
-    return render_template("construccion.html")
-
-
 @app.route("/home")
+@app.route("/index")
 def home():
-    return render_template("index.html")
+  # numItemsFromDB = 15
+  # return render_template("index.html", data = numItemsFromDB)
+  return render_template("index.html")
 
 @app.route("/login")
 def loginForm():
@@ -161,9 +157,136 @@ def admin():
     return render_template("admin.html")
 # Reinaldo test
 @app.route("/api")
+# START Reinaldo test
+@app.route("/api", methods=["GET", "POST"])
 def api():
+	if request.method == "POST":
+		url = "https://www.random.org/integers/?num=1&min=1&max=1000&col=1&base=10&format=plain&rnd=new"
+		response = requests.get(url).json()
+		print(f"response: {response}")
+
+		fin = request.form['fin']
+		fou = request.form['fou']
+
+		print(f"data: {request.form['texto']}")
+		print(f"data: {fin}")
+		print(f"data: {fou}")
+
+		try:
+			ins = f"INSERT INTO fechasPrueba (fechainicial, fechaFinal) VALUES (?, ?)"
+			insRes = accion(ins, (fin, fou))
+
+			if res != 0:
+				print("guardado")
+			else:
+				print("error guardando")
+		except Exception as e:
+			print(e)
+
+		print("---------")
+
+		queRes = '' # ('2021-11-02', '2021-11-05')
+		try:
+			queRes = seleccion(f"SELECT fechainicial, fechaFinal FROM fechasPrueba")
+
+			if queRes != 0:
+				print("leido")
+				print(queRes)
+			else:
+				print("error leer")
+		except Exception as e:
+			print(e)
+
 	return render_template("reinaldo.html")
-# Reinaldo test
+# END Reinaldo test
+
+@app.route("/producto", methods=["GET", "POST"])
+def producto():
+	savedLote, savedProd, toShow = False, False, False
+	codigoProducto, nombreProducto, buscarQue = None, None, None
+
+	if request.method == "POST":
+		buscar = request.form.get("buscar", False)
+		enviar = request.form.get("enviar", False)
+
+		codProd = request.form["codigoProducto"]
+		nomProd = request.form["nombreProducto"]
+		if len(re.findall("\d+", codProd)) != 0:
+			codigoProducto = int(codProd)
+		if len(re.findall("^(?!\s*$).+", nomProd)) != 0:
+			nombreProducto = nomProd.lower()
+		
+		if enviar and codigoProducto != None and nombreProducto != None:
+			try:
+				numeroLote = int(request.form["numeroLote"])
+				tipoUnidad = request.form["tipoUnidad"].lower()
+				fechaEntrada = request.form["fechaEntrada"].lower()
+				porcPromo = int(request.form["porcPromo"])
+				precioUni = int(request.form["precioUni"])
+				cantidad = int(request.form["cantidad"])
+
+				url = "https://www.random.org/integers/?num=1&min=1&max=10000&col=1&base=10&format=plain&rnd=new"
+				referencia = requests.get(url).json()
+
+				insertLote = f"INSERT INTO Lotes (codProducto, fechaEntrada, cantidad) VALUES (?, ?, ?)"
+				resultLote = accion(insertLote, (codigoProducto, fechaEntrada, cantidad))
+
+				if resultLote != 0:
+					savedLote = True
+
+				# categoria esta en la tabla pero se debe calcular no se lee
+				insertProd = f"INSERT INTO Producto (nombre, tipo, precio, promocion,  referencia) VALUES (?, ?, ?, ?, ?)"
+				resultProd = accion(insertProd, (nombreProducto, tipoUnidad, precioUni, porcPromo, referencia))
+
+				if insertProd != 0:
+					savedProd = True
+
+				if savedLote and savedProd:
+					flash(f"Datos guardados con exito")
+				else:
+					flash(f"Error al guardar los datos")
+
+			except ValueError as ve:
+				flash(f'La informacion ingresada no es valida o esta incompleta')
+
+		elif buscar and codigoProducto != None:
+			try:
+				buscarQue = seleccion(f"SELECT * FROM Producto WHERE referencia = '{codigoProducto}'")
+
+				if len(buscarQue) > 0:
+					#PENDIENTE, aplicar update
+					toShow = True
+					print('SI existe')
+				else:
+					toShow = False
+					print('NO existe')
+
+			except Exception as e:
+				print(e)
+
+		elif buscar and nombreProducto != None:
+			try:
+				if len(nombreProducto) > 0:
+					'''
+					sql = f"SELECT usuarios.nombre, usuarios.apellido, comentarios.comentario, comentarios.calificacion, habitaciones.numero_habitacion, habitaciones.caracteristicas FROM comentarios INNER JOIN usuarios ON comentarios.identificacion = usuarios.numero_documento INNER JOIN habitaciones ON habitaciones.numero_habitacion = comentarios.habitacion"
+					'''
+					matchQue = seleccion(f"SELECT * FROM Producto WHERE nombre LIKE '%{nombreProducto}%'")
+					if len(matchQue) > 0:
+						print(f'matchQue {matchQue}')
+					else:
+						print(f'matchQue ELSE')
+			except Exception as e:
+				print(e)
+				
+		else:
+			flash(f'La informacion ingresada no es valida o esta incompleta')
+
+	context = {
+		'toShow' : toShow,
+		'data' : buscarQue
+	}
+
+	return render_template("punto2.html", **context)
 
 
 # Registro Clientes

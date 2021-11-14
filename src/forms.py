@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField, DateField, SelectField, TextAreaField, StringField
 from wtforms.validators import InputRequired, EqualTo, DataRequired
+from wtforms import TextField, SubmitField
 
 class RegistroCliente(FlaskForm):    
 	cedula = StringField('Cedula*', validators=[DataRequired()])
