@@ -76,3 +76,8 @@ class CambioClave(FlaskForm):
 	clave_nueva = PasswordField('Clave nueva*', validators=[DataRequired()])
 	clave_confirma = PasswordField('Confirma clave*', validators=[DataRequired()])
 	cambiar = SubmitField('Cambiar Clave')
+
+class Comentarios(FlaskForm):
+    calificacion = RadioField('Calificación', choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')],default='5')
+    comentarios = TextField('Comentarios',validators = [InputRequired(message='Campo obligatorio'),validators.Regexp('\w+', flags=0, message='caracteres no permitidos')])
+    
