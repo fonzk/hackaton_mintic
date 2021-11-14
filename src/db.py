@@ -1,6 +1,7 @@
 import sqlite3
 
-DB_URL = 'bd/DB.db'
+DB_URL = 'db/DB.db'
+URL_DB = 'db/DB.db'
 
 def accion(sql, data) -> int:
 	""" (INSERT, DELETE, UPDATE) """
@@ -25,9 +26,6 @@ def seleccion(query) -> list:
 		print(f'ExceptionSeleccion: {ex}')
 		sal = []
 	return sal
-
-
-URL_DB = 'DB.db'
 
 def consult_select(query)->list:
     try:
