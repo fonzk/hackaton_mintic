@@ -190,6 +190,11 @@ def producto():
 
 				url = "https://www.random.org/integers/?num=1&min=1&max=10000&col=1&base=10&format=plain&rnd=new"
 				referencia = requests.get(url).json()
+				refQue = seleccion(f"SELECT COUNT(referencia) FROM producto WHERE referencia = {referencia}")
+				while refQue[0][0] > 0:
+					referencia = requests.get(url).json()
+
+				codQuery = seleccion(f"SELECT COUNT(")
 
 				insertLote = f"INSERT INTO Lotes (codProducto, fechaEntrada, cantidad) VALUES (?, ?, ?)"
 				resultLote = accion(insertLote, (codigoProducto, fechaEntrada, cantidad))
@@ -253,6 +258,24 @@ def producto():
 	return render_template("punto2.html", **context)
 
 
+@app.route("/inventario", methods=['GET', 'POST'])
+def inventario():
+	if request.method == 'POST':
+		pass
+	else:
+		buscar = seleccion(f"SELECT Producto.nombre, Comentario.calificacion, Producto.precio, Producto.promocion FROM Producto INNER JOIN Comentario ON Producto.codigo = Comentario.codProducto")
+	if len(buscar) == 0:
+		dat = None
+		msg = 'No existen registros'
+	else:
+		dat = buscar[0]
+		msg = 'Se muestran los datos'
+	
+	contexto = {
+		'data' : [(dat[0], int(dat[1]), dat[2], dat[3], dat[2] - (dat[2] * dat[3] / 100))]
+	}
+
+	return render_template('inventario.html', **contexto)
 
 
 # Registro Clientes
