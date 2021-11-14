@@ -43,12 +43,10 @@ def validarLogin():
 		if len(res)!=0:
 			sql2 = f"SELECT * FROM Person WHERE username = '{user}'"
 			res2 = consult_select(sql2)
-			print(res2)
 			passw = res2[0][8]
 			activo = res2[0][11]
 			confirmPassword = check_password_hash(passw,pwd)
-			print(passw,activo)
-			if confirmPassword == True and activo == 1:
+			if confirmPassword == True and activo == '1':
 				#si el usuario y la password son correctos creamos la session y lo enviamos al dashboard
 				session['name'] = res2[0][1]
 				session['userName'] = res2[0][4]

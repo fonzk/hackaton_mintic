@@ -37,14 +37,15 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-3 d-flex justify-content-lg-between align-content-center align-item-center mt-2 mt-lg-0">
                   <span class="icon__car"><i class="fas fa-cart-plus text-success"></i></span><a href="#" class="text-danger carrito" data-bs-toggle="modal" data-bs-target="#exampleModal2">4</a>
-                  {% if 'username' in session %}
+                  {% if 'userName' in session %}
                   <form action="{{ url_for('logout') }}">
                     <button class="btn btn-danger">Cerrar sesión</button>
                   </form>
-                  {% endif %}
+                  {% else %}
                   <form action="{{ url_for('loginForm') }}">
                     <button class="btn btn-success">Iniciar sesión</button>
                   </form>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -77,7 +78,13 @@
                 <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Contraseña</label>
               </div>
-              <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Registrarme</button>
+              <div class="d-flex align-content-between">
+                <button class="mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Registrarme</button>
+                <form action="">
+                  <button class="mb-2 btn btn-lg rounded-4 btn-success" type="submit">Terminar Perfil</button>
+                </form>
+              </div>
+
             </form>
           </div>
         </div>
