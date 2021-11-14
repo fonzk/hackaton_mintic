@@ -1,15 +1,15 @@
 
 from flask import Flask, render_template, request, jsonify, redirect, session, url_for, flash
 from flask.helpers import flash, url_for
+from markupsafe import escape
 from werkzeug.utils import secure_filename
 from werkzeug.wrappers import response
+from werkzeug.security import check_password_hash, generate_password_hash
 from wtforms.i18n import messages_path
 from formularios import FormPart, Login, RegistroCliente, ActualizaCliente, CambioClave
-from markupsafe import escape
-from werkzeug.security import check_password_hash, generate_password_hash
-import os, requests, re
 from db import accion, seleccion
 from db import consult_action, consult_select
+import os, requests, re
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -210,8 +210,8 @@ def producto():
 		buscar = request.form.get("buscar", False)
 		enviar = request.form.get("enviar", False)
 
-		codProd = request.form["codigoProducto"]
-		nomProd = request.form["nombreProducto"]
+		codProd = escape(request.form["codigoProducto"])
+		nomProd = escape(request.form["nombreProducto"])
 		if len(re.findall("\d+", codProd)) != 0:
 			codigoProducto = int(codProd)
 		if len(re.findall("^(?!\s*$).+", nomProd)) != 0:
@@ -219,12 +219,15 @@ def producto():
 		
 		if enviar and codigoProducto != None and nombreProducto != None:
 			try:
-				numeroLote = int(request.form["numeroLote"])
-				tipoUnidad = request.form["tipoUnidad"].lower()
-				fechaEntrada = request.form["fechaEntrada"].lower()
-				porcPromo = int(request.form["porcPromo"])
-				precioUni = int(request.form["precioUni"])
-				cantidad = int(request.form["cantidad"])
+				numeroLote = int(escape(request.form["numeroLote"]))
+				tipoUnidad = escape(request.form["tipoUnidad"].lower())
+				fechaEntrada = escape(request.form["fechaEntrada"].lower())
+				porcPromo = int(escape(request.form["porcPromo"]))
+				precioUni = int(escape(request.form["precioUni"]))
+				cantidad = int(escape(request.form["cantidad"]))
+
+				f = request.files['file']
+      			f.save(secure_filename(f.filename))
 
 				url = "https://www.random.org/integers/?num=1&min=1&max=10000&col=1&base=10&format=plain&rnd=new"
 				referencia = requests.get(url).json()
