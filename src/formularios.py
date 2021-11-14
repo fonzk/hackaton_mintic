@@ -78,6 +78,6 @@ class CambioClave(FlaskForm):
 	cambiar = SubmitField('Cambiar Clave')
 
 class Comentarios(FlaskForm):
-    calificacion = RadioField('Calificación', choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')],default='5')
-    comentarios = TextField('Comentarios',validators = [InputRequired(message='Campo obligatorio'),validators.Regexp('\w+', flags=0, message='caracteres no permitidos')])
-    
+    nombreProducto = TextField('Nombre Producto',validators = [InputRequired(message='Campo obligatorio'),validators.Regexp('/^[A-Za-z0-9\s]+$/g', flags=0, message='caracteres no permitidos')])    
+    codigoProducto = TextField('Codigo Producto',validators = [InputRequired(message='Campo obligatorio'),validators.Regexp('/^[A-Za-z0-9\s]+$/g', flags=0, message='caracteres no permitidos')])
+    actualizarProducto = SubmitField('Actualizar Producto')
