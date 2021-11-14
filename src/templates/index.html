@@ -185,186 +185,24 @@
     
   <main class="container mt-lg-2">
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p1.jpg') }}"  class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Samsung A70</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 1><i class="fas fa-cart-plus"></i> Carrito</a>
+      {% for p in prods %}
+        
+          <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
+            <div class="card">
+              <img src="{{ url_for('static', filename='img/products/p1.jpg') }}"  class="card-img-top" alt="img">
+              <div class="card-body text-center">
+                <h5 class="card-title">{{p[1] }}</h5>
+                <div class="text-center">
+                  <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
+                  <a href="#" class="btn btn-success id__product" name= 1><i class="fas fa-cart-plus"></i> Carrito</a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p2.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Balón Fútbol</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 2><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p3.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Olla Óster</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 3><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p4.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Persiana</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 4><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p5.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Corona Negra</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 5><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p6.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Persiana Tela</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 6><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p7.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Nevera 700L</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 7><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p8.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Olla a Presión</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 8><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p9.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Nevera 300L</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 9><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p10.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Tenni Nike</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 10><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p11.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Olla Acero</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 11><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p12.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Samsung A100</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 12><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p13.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Tennis Predattor</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 13><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p14.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Herramienta</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 14><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 mt-2 mt-lg-3 mb-lg-2 mb-lg-3">
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/products/p15.jpg') }}" class="card-img-top" alt="img">
-          <div class="card-body text-center">
-            <h5 class="card-title">Corona Floral</h5>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> Ver más</a>
-              <a href="#" class="btn btn-success id__product" name= 15><i class="fas fa-cart-plus"></i> Carrito</a>
-            </div>
-          </div>
-        </div>
-      </div>
+        
+      {% endfor %}
+    
+     
     </div>
   </main>
 

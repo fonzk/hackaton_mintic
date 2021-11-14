@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" src="{{ url_for('static', filename='img/logo2.svg') }}" type="image/svg" sizes="40x40">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/prueba/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/prueba/bootstrap.css') }}">
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/myStyle.css') }}">
-    <title>Isagen</title>
+     --><link rel="stylesheet" href="{{ url_for('static', filename='css/fonzk.css') }}">
+    <title>Isagen | Login</title>
 </head>
 <body class="body__login">
   <form class="box__login" method="POST" action="{{ url_for('validarLogin') }}">
