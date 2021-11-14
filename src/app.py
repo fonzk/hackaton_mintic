@@ -4,15 +4,12 @@ from flask.helpers import flash, url_for
 from werkzeug.utils import secure_filename
 from werkzeug.wrappers import response
 from wtforms.i18n import messages_path
-from formularios import FormPart, Login
+from formularios import FormPart, Login, RegistroCliente, ActualizaCliente, CambioClave
 from markupsafe import escape
-from db import consult_action, consult_select
 from werkzeug.security import check_password_hash, generate_password_hash
 import os, requests, re
 from db import accion, seleccion
-
-from forms import RegistroCliente, ActualizaCliente, CambioClave
-from db import accion, seleccion
+from db import consult_action, consult_select
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -268,15 +265,16 @@ def producto():
 
 		elif buscar and nombreProducto != None:
 			try:
-				if len(nombreProducto) > 0:
-					'''
-					sql = f"SELECT usuarios.nombre, usuarios.apellido, comentarios.comentario, comentarios.calificacion, habitaciones.numero_habitacion, habitaciones.caracteristicas FROM comentarios INNER JOIN usuarios ON comentarios.identificacion = usuarios.numero_documento INNER JOIN habitaciones ON habitaciones.numero_habitacion = comentarios.habitacion"
-					'''
-					matchQue = seleccion(f"SELECT * FROM Producto WHERE nombre LIKE '%{nombreProducto}%'")
-					if len(matchQue) > 0:
-						print(f'matchQue {matchQue}')
-					else:
-						print(f'matchQue ELSE')
+				'''
+				sql = f"SELECT usuarios.nombre, usuarios.apellido, comentarios.comentario, comentarios.calificacion, habitaciones.numero_habitacion, habitaciones.caracteristicas FROM comentarios INNER JOIN usuarios ON comentarios.identificacion = usuarios.numero_documento INNER JOIN habitaciones ON habitaciones.numero_habitacion = comentarios.habitacion"
+				'''
+				buscarQue = seleccion(f"SELECT * FROM Producto WHERE nombre LIKE '%{nombreProducto}%'")
+				if len(buscarQue) > 0:
+					toShow = True
+					print(f'matchQue {buscarQue}')
+				else:
+					toShow = False
+					print(f'matchQue ELSE')
 			except Exception as e:
 				print(e)
 				

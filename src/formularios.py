@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, PasswordField, validators, SubmitField, SelectField, RadioField, FileField, FloatField, TextAreaField
+from wtforms import TextField, PasswordField, validators, SubmitField, SelectField, RadioField, FileField, FloatField, TextAreaField, StringField
 from markupsafe import Markup
 from datetime import date
-from wtforms.validators import InputRequired , Regexp 
+from wtforms.validators import InputRequired , Regexp, DataRequired
 from wtforms.fields.html5 import EmailField,DateField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 
@@ -47,3 +47,32 @@ class FormPart(FlaskForm):
     img2 = FileField('Segunda imagen del producto', validators=[FileAllowed(['jpg', 'png'])])
     img3 = FileField('Tercera imagen del producto', validators=[FileAllowed(['jpg', 'png'])])
     actualizarProducto = SubmitField('Actualizar Producto')
+
+class RegistroCliente(FlaskForm):    
+	cedula = StringField('Cedula*', validators=[DataRequired()])
+	nombres = StringField('Nombres')
+	apellidos = StringField('Apellidos')
+	sexo = SelectField(u'Sexo', choices=[('Masculino'), ('Femenino'), ('NS / NR')], option_widget=None)
+	f_nacimiento = DateField('Fecha de Nacimiento', format='%d/%m/%Y')
+	direccion = StringField('Direccion')
+	ciudad = StringField('Ciudad')
+	usuario = StringField('Usuario*', validators=[DataRequired()])
+	clave = PasswordField('Clave*', validators=[DataRequired()])
+	registrar = SubmitField('Registrar')
+
+class ActualizaCliente(FlaskForm):    
+	cedula = StringField('Cedula*', validators=[DataRequired()])
+	nombres = StringField('Nombres')
+	apellidos = StringField('Apellidos')
+	sexo = SelectField(u'Sexo', choices=[('Masculino'), ('Femenino'), ('NS / NR')], option_widget=None)
+	f_nacimiento = DateField('Fecha de Nacimiento')
+	direccion = StringField('Direccion')
+	ciudad = StringField('Ciudad')
+	actualizar = SubmitField('Actualizar')
+
+class CambioClave(FlaskForm):
+	usuario = StringField('Usuario*', validators=[DataRequired()])
+	clave = PasswordField('Clave actual*', validators=[DataRequired()])
+	clave_nueva = PasswordField('Clave nueva*', validators=[DataRequired()])
+	clave_confirma = PasswordField('Confirma clave*', validators=[DataRequired()])
+	cambiar = SubmitField('Cambiar Clave')
