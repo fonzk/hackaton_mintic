@@ -6,7 +6,10 @@ from werkzeug.utils import secure_filename
 from werkzeug.wrappers import response
 from werkzeug.security import check_password_hash, generate_password_hash
 from wtforms.i18n import messages_path
-from formularios import FormPart, Login, RegistroCliente, ActualizaCliente, CambioClave
+from formularios import FormPart, Login, RegistroCliente, ActualizaCliente, CambioClave, Comentarios
+from markupsafe import escape
+from werkzeug.security import check_password_hash, generate_password_hash
+import os, re
 from db import accion, seleccion
 from db import consult_action, consult_select
 import os, requests, re
@@ -43,12 +46,10 @@ def validarLogin():
 		if len(res)!=0:
 			sql2 = f"SELECT * FROM Person WHERE username = '{user}'"
 			res2 = consult_select(sql2)
-			print(res2)
 			passw = res2[0][8]
 			activo = res2[0][11]
 			confirmPassword = check_password_hash(passw,pwd)
-			print(passw,activo)
-			if confirmPassword == True and activo == 1:
+			if confirmPassword == True and activo == '1':
 				#si el usuario y la password son correctos creamos la session y lo enviamos al dashboard
 				session['name'] = res2[0][1]
 				session['userName'] = res2[0][4]
@@ -335,7 +336,7 @@ def cambiarClave():
 		form.usuario.data = response[0][0]
 	if request.method == 'POST':
 		try:			
-			usuario = escape(request.form.get('usuario')).lower()
+			usuario = escape(request.formegistroCliente.get('usuario')).lower()
 			clave = escape(request.form.get('clave')).lower()
 			clave_nueva = escape(request.form.get('clave_nueva')).lower()
 			confirma_clave = escape(request.form.get('confirma_clave')).lower()
@@ -351,6 +352,35 @@ def cambiarClave():
 		except ValueError as ve:
 			flash(f'La informacion ingresada no es valida o esta incompleta')
 	return render_template("cambioClave.html", form = form)
+
+# Comentarios
+@app.route("/comentarios", methods=['GET', 'POST'])
+def comentarios():
+	form = Comentarios()
+	if request.method == "POST":
+		buscar = request.form.get("buscar", False)
+		calificar = request.form.get("calificar", False)
+		ultimas_calif = request.form.get("ultCalif", False)
+		ultimos_coment = request.form.get("ultComent", False)
+
+		codProd = escape(request.form["codigoProducto"])
+		nomProd = escape(request.form["nombreProducto"])
+		if buscar:
+			print('busqeuda')
+		elif calificar:
+			print('calif')
+		elif ultimas_calif:
+			print('ult Calif')
+		elif ultimos_coment:
+			print('ult Coment')
+	return render_template("comentarios.html", form = form)
+
+
+	# Obtener id ultimo registro (temporal) modificar por sesion
+	# id = seleccion(f"SELECT id FROM Person ORDER BY rowid LIMIT 1")[0][0]
+
+	# sql = f"SELECT id, Nombres, Apellidos, Sexo, Fecha, Direccion, Ciudad FROM Person WHERE id = { ced }"
+	# 	response = seleccion(sql)
 
 #function load prods :AlfonsoD
 def loadProds():
