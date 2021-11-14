@@ -13,7 +13,7 @@
 	<br>
 	<br>
 	<div class="container">
-		<form class="row g-3" action="{{ url_for('producto') }}" method="POST">
+		<form class="row g-3" action="{{ url_for('producto') }}" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<div class="form-floating col-md-2">
 					<input type="text" class="form-control" id="codigoProducto" name="codigoProducto" placeholder="Codigo del producto">
@@ -51,6 +51,12 @@
 				<input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
 				<label for="cantidad">Cantidad</label>
 			</div>
+
+			<div class="form-floating col-md-3">
+				<input type = "file" name = "file" />
+				<input type = "submit"/>
+			</div>
+
 			<div class="col-md-2 btn btn-primary btn-lg">
 				<button type="submit" class="btn btn-primary" name="enviar" value="enviar">Enviar</button>
 			</div>
