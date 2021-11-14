@@ -4,15 +4,12 @@ from flask.helpers import flash, url_for
 from werkzeug.utils import secure_filename
 from werkzeug.wrappers import response
 from wtforms.i18n import messages_path
-from formularios import FormPart, Login
+from formularios import FormPart, Login, RegistroCliente, ActualizaCliente, CambioClave
 from markupsafe import escape
-from db import consult_action, consult_select
 from werkzeug.security import check_password_hash, generate_password_hash
 import os, requests, re
 from db import accion, seleccion
-
-from forms import RegistroCliente, ActualizaCliente, CambioClave
-from db import accion, seleccion
+from db import consult_action, consult_select
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
