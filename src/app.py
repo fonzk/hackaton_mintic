@@ -266,15 +266,16 @@ def producto():
 
 		elif buscar and nombreProducto != None:
 			try:
-				if len(nombreProducto) > 0:
-					'''
-					sql = f"SELECT usuarios.nombre, usuarios.apellido, comentarios.comentario, comentarios.calificacion, habitaciones.numero_habitacion, habitaciones.caracteristicas FROM comentarios INNER JOIN usuarios ON comentarios.identificacion = usuarios.numero_documento INNER JOIN habitaciones ON habitaciones.numero_habitacion = comentarios.habitacion"
-					'''
-					matchQue = seleccion(f"SELECT * FROM Producto WHERE nombre LIKE '%{nombreProducto}%'")
-					if len(matchQue) > 0:
-						print(f'matchQue {matchQue}')
-					else:
-						print(f'matchQue ELSE')
+				'''
+				sql = f"SELECT usuarios.nombre, usuarios.apellido, comentarios.comentario, comentarios.calificacion, habitaciones.numero_habitacion, habitaciones.caracteristicas FROM comentarios INNER JOIN usuarios ON comentarios.identificacion = usuarios.numero_documento INNER JOIN habitaciones ON habitaciones.numero_habitacion = comentarios.habitacion"
+				'''
+				buscarQue = seleccion(f"SELECT * FROM Producto WHERE nombre LIKE '%{nombreProducto}%'")
+				if len(buscarQue) > 0:
+					toShow = True
+					print(f'matchQue {buscarQue}')
+				else:
+					toShow = False
+					print(f'matchQue ELSE')
 			except Exception as e:
 				print(e)
 				
