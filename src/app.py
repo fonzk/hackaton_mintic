@@ -12,7 +12,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import os, re
 from db import accion, seleccion
 from db import consult_action, consult_select
-import os, requests, re
+# import os, requests, re
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -399,30 +399,57 @@ def cambiarClave():
 @app.route("/comentarios", methods=['GET', 'POST'])
 def comentarios():
 	form = Comentarios()
+	
+	bandera = True
+	flagCalif = False
+
+	flash(f" ")
+
 	if request.method == "POST":
 		buscar = request.form.get("buscar", False)
 		calificar = request.form.get("calificar", False)
 		ultimas_calif = request.form.get("ultCalif", False)
 		ultimos_coment = request.form.get("ultComent", False)
-
 		codProd = escape(request.form["codigoProducto"])
 		nomProd = escape(request.form["nombreProducto"])
-		if buscar:
-			print('busqeuda')
+		if (buscar and (codProd or nomProd)):
+			if codProd:
+				try:
+					sql1 = f"SELECT nombre FROM Producto WHERE codigo = { codProd }"
+					if seleccion(sql1):
+						bandera = False
+					else:
+						flash(f"No se encontró el producto")
+						bandera = True
+				except Exception as e:
+					print(e)
+			if nomProd:
+				try:
+					sql2 = f"SELECT codigo FROM Producto WHERE nombre = { nomProd }"
+					if seleccion(sql2):
+						bandera = False
+					else:
+						flash(f"No se encontró el producto")
+						bandera = True
+				except Exception as e:
+					print(e)
 		elif calificar:
-			print('calif')
-		elif ultimas_calif:
-			print('ult Calif')
-		elif ultimos_coment:
-			print('ult Coment')
-	return render_template("comentarios.html", form = form)
-
-
-	# Obtener id ultimo registro (temporal) modificar por sesion
-	# id = seleccion(f"SELECT id FROM Person ORDER BY rowid LIMIT 1")[0][0]
-
-	# sql = f"SELECT id, Nombres, Apellidos, Sexo, Fecha, Direccion, Ciudad FROM Person WHERE id = { ced }"
-	# 	response = seleccion(sql)
+			flagCalif = True
+			print("ok")
+			# 	elif nomProd:
+			# 		sql = f"SELECT codigo FROM Producto WHERE nombre = { nomProd }"
+			# 		flash(f"Datos guardados con exito")
+			
+			# 
+			# 	print('calif')
+			# elif ultimas_calif:
+			# 	print('ult Calif')
+			# elif ultimos_coment:
+			# 	print('ult Coment')
+		
+	else: 
+		flash("")
+	return render_template("comentarios.html", form = form, bandera = bandera, flagCalif = flagCalif)
 
 #function load prods :AlfonsoD
 def loadProds():

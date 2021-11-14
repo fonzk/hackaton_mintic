@@ -28,16 +28,41 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="form-floating col-md-2"></div>
 				<div class="col-md-2 btn btn-primary btn-lg">
-					<button type="submit" class="btn btn-primary" name="calificar" value="calificar">Calificar / Comentar</button>
+					<button type="submit" class="btn btn-primary" name="calificar" value="calificar" {% if bandera %} disabled {% endif %}>Calificar / Comentar</button>
 				</div>   
                 <div class="col-md-2 btn btn-primary btn-lg">
-					<button type="submit" class="btn btn-primary" name="ultCalif" value="ultCalif">Ultimas Calificaciones</button>
+					<button type="submit" class="btn btn-primary" name="ultCalif" value="ultCalif" {% if bandera %} disabled {% endif %}>Ultimas Calificaciones</button>
 				</div>
                 <div class="col-md-2 btn btn-primary btn-lg">
-					<button type="submit" class="btn btn-primary" name="ultComent" value="ultComent">Ultimos Comentarios</button>
+					<button type="submit" class="btn btn-primary" name="ultComent" value="ultComent" {% if bandera %} disabled {% endif %}>Ultimos Comentarios</button>
 				</div>
             </div>
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<div id="message" class="row">
+						{% for message in messages %}
+							<div class='flash'>{{ message }}</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			{% endwith %}
+			{% if flagCalif %}
+			<div class="row">
+				<div class="form-floating col-md-2">
+					<input type="text" class="form-control" id="calificacion" name="calificacion" placeholder="Calificacion del producto">
+					<label for="calificacion">Calificacion del producto</label>
+				</div>
+				<div class="form-floating col-md-4">
+					<input type="text" class="form-control" id="comentarios" name="comentarios" placeholder="Comentarios del producto">
+					<label for="comentarios">Comentarios del producto</label>
+				</div>
+				<div class="col-md-2 btn btn-primary btn-lg">
+					<button type="submit" class="btn btn-primary" name="agregar" value="agregar">Agregar</button>
+				</div>
+			</div>			
+			{% endif %}
         </form>
     </div>
 </body>
