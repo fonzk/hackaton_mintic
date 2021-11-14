@@ -21,7 +21,8 @@ app.url_map.strict_slashes = False
 def home():
   # numItemsFromDB = 15
   # return render_template("index.html", data = numItemsFromDB)
-  return render_template("index.html")
+
+  return render_template("index.html", prods= loadProds())
 
 @app.route("/login")
 def loginForm():
@@ -201,6 +202,7 @@ def api():
 
 @app.route("/producto", methods=["GET", "POST"])
 def producto():
+
 	savedLote, savedProd, toShow = False, False, False
 	codigoProducto, nombreProducto, buscarQue = None, None, None
 
@@ -290,6 +292,8 @@ def producto():
 	}
 
 	return render_template("punto2.html", **context)
+
+
 
 
 # Registro Clientes
@@ -390,6 +394,20 @@ def cambiarClave():
 			flash(f'La informacion ingresada no es valida o esta incompleta')
 	return render_template("cambioClave.html", form = form)
 
+#function load prods :AlfonsoD
+def loadProds():
+	
+	try:
+
+		products = seleccion(f"SELECT * FROM Producto")
+		if len(products) > 0:
+			print(f'Products: {products}')
+		else:
+			print(f'products ELSE')
+	except Exception as e:
+				print(e)
+	return products
+
 if __name__ == '__main__':
-	app.run()
+	app.run(debug=True)
 
