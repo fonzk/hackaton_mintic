@@ -225,7 +225,7 @@ def producto():
 				cantidad = int(escape(request.form["cantidad"]))
 
 				f = request.files['file']
-      			f.save(secure_filename(f.filename))
+      			# f.save(secure_filename(f.filename))
 
 				url = "https://www.random.org/integers/?num=1&min=1&max=10000&col=1&base=10&format=plain&rnd=new"
 				referencia = requests.get(url).json()
