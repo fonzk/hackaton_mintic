@@ -155,50 +155,7 @@ def logout():
 @app.route("/admin")
 def admin():
     return render_template("admin.html")
-# Reinaldo test
-@app.route("/api")
-# START Reinaldo test
-@app.route("/api", methods=["GET", "POST"])
-def api():
-	if request.method == "POST":
-		url = "https://www.random.org/integers/?num=1&min=1&max=1000&col=1&base=10&format=plain&rnd=new"
-		response = requests.get(url).json()
-		print(f"response: {response}")
 
-		fin = request.form['fin']
-		fou = request.form['fou']
-
-		print(f"data: {request.form['texto']}")
-		print(f"data: {fin}")
-		print(f"data: {fou}")
-
-		try:
-			ins = f"INSERT INTO fechasPrueba (fechainicial, fechaFinal) VALUES (?, ?)"
-			insRes = accion(ins, (fin, fou))
-
-			if res != 0:
-				print("guardado")
-			else:
-				print("error guardando")
-		except Exception as e:
-			print(e)
-
-		print("---------")
-
-		queRes = '' # ('2021-11-02', '2021-11-05')
-		try:
-			queRes = seleccion(f"SELECT fechainicial, fechaFinal FROM fechasPrueba")
-
-			if queRes != 0:
-				print("leido")
-				print(queRes)
-			else:
-				print("error leer")
-		except Exception as e:
-			print(e)
-
-	return render_template("reinaldo.html")
-# END Reinaldo test
 
 @app.route("/producto", methods=["GET", "POST"])
 def producto():
@@ -226,7 +183,8 @@ def producto():
 				precioUni = int(escape(request.form["precioUni"]))
 				cantidad = int(escape(request.form["cantidad"]))
 
-				f = request.files['file']
+				# f = request.files['file']
+				# print(f'f: {f}')
       			# f.save(secure_filename(f.filename))
 
 				url = "https://www.random.org/integers/?num=1&min=1&max=10000&col=1&base=10&format=plain&rnd=new"
